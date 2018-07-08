@@ -22,6 +22,7 @@ class Film
      */
     private $description;
 
+    private $actor;
 
     /**
      * Get id

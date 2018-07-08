@@ -16,4 +16,11 @@ FilmApp\Domain\Film:
         description:
             type: text
             nullable: true
+    manyToOne:
+        actor:
+            targetEntity: Actor
+            joinColumn:
+                name: actor_id
+                referencedColumnName: id
+            fetch: EAGER
     lifecycleCallbacks: {  }
