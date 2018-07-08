@@ -1,77 +1,19 @@
-Symfony Standard Edition
-========================
+# Entregable: Práctica Final - Film API
 
-**WARNING**: This distribution does not support Symfony 4. See the
-[Installing & Setting up the Symfony Framework][15] page to find a replacement
-that fits you best.
+En este ejercicio pondrás en práctica todos los conocimientos adquiridos durante el transcurso de la asignatura. Deberás aplicar también todas las herramientas de las que dispongas para realizar un desarrollo eficiente del software: patrones de diseño, refactorings, arquitectura hexagonal, etc.
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+El objetivo de este ejercicio es crear una API (mayoritariamente) para almacenar películas y sus actores.
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+Las dos entidades principales serán Film y Actor.
 
-What's inside?
---------------
+Un Film tendrá las propiedades name y description y se relacionará con un Actor, que tendrá la propiedad name.
 
-The Symfony Standard Edition is configured with the following defaults:
+La API HTTP debe permitir, para los Film: todas las operaciones CRUD. La API HTTP para los Actor debe pemitir, como mínimo, las operaciones CRD. Además, se ofrecerán dos páginas de interfaz de usuario, una para la lectura de las propiedades de un Film en concreto y otra para la lectura de las propiedades de un Actor en concreto. Estas páginas de interfaz de usuario deben estar convenientemente internacionalizadas en inglés y español. Los textos dinámicos (nombre, descripción, etc.) no deben estar internacionalizados, sólo las etiquetas. Por ejemplo: Nombre/Name: National Treasure.
 
-  * An AppBundle you can use to start coding;
+Además, se deberá permitir realizar todas las operaciones CRUD de Film por consola mediante operaciones por la consola (bin/console) de Symfony.
 
-  * Twig as the only configured template engine;
+Finalmente, como la página recibirá muchas peticiones, necesitarás implementar una caché, de momento usando el Sistema de Ficheros. Cada vez que se haga una petición de una película, la caché comprobará si la tiene cacheada o no. Si la tiene cacheada, devolverá los datos de la caché. Si no la tiene cacheada pedirá los datos a la base de datos y la cacheará. Si la película es actualizada, se invalidará la caché. Las funcionalidades CRUD contra la base de datos deben ser independientes de si existe caché o no. Si existe caché se decorarán las operaciones CRUD. Puedes utilizar como referencia el enlace: [Caching](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/caching.html), pero es posible que te falte información.
 
-  * Doctrine ORM/DBAL;
+Deberás aplicar arquitectura hexagonal y buenas prácticas de diseño en la medida de lo posible. Es obligatorio usar eventos, te pueden ser muy útiles para algunas funcionalidades de la caché.
 
-  * Swiftmailer;
-
-  * Annotations enabled for everything.
-
-It comes pre-configured with the following bundles:
-
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev env) - Adds code generation
-    capabilities
-
-  * [**WebServerBundle**][14] (in dev env) - Adds commands for running applications
-    using the PHP built-in web server
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/3.4/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.4/doctrine.html
-[8]:  https://symfony.com/doc/3.4/templating.html
-[9]:  https://symfony.com/doc/3.4/security.html
-[10]: https://symfony.com/doc/3.4/email.html
-[11]: https://symfony.com/doc/3.4/logging.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
-[14]: https://symfony.com/doc/current/setup/built_in_web_server.html
-[15]: https://symfony.com/doc/current/setup.html
+Deberás entregar la URL del repositorio de este entregable. Si es un repositorio privado, deberás dar acceso de lectura al mentor de la asignatura.
