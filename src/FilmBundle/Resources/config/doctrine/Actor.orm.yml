@@ -1,7 +1,6 @@
 FilmApp\Domain\Actor:
     type: entity
     table: null
-    repositoryClass: FilmBundle\Repository\ActorRepository
     id:
         id:
             type: integer

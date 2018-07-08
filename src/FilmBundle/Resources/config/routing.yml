@@ -15,3 +15,8 @@ actor_show:
     methods: [GET]
     requirements:
         param1: 'd+'
+
+actor_create:
+    path: /api/actor/create/
+    defaults: { _controller: FilmBundle:ApiActor:create }
+    methods: [POST]

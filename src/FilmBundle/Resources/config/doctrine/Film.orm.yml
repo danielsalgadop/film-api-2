@@ -1,7 +1,6 @@
 FilmApp\Domain\Film:
     type: entity
     table: null
-    repositoryClass: FilmApp\Domain\FilmRepository
     id:
         id:
             type: integer
