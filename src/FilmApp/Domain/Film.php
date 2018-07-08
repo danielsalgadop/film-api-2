@@ -26,7 +26,7 @@ class Film
 
         // Validate
         $this->isValidNameOrError($name);
-        $this->isValidDescriptionOrError($description);
+        // $this->isValidDescriptionOrError($description);
 
         $this->name = $name;
         $this->description = $description;
@@ -79,14 +79,6 @@ class Film
         return true;
     }
 
-    // TODO reuse this behaviour move to general Validator
-    public function isValidDescriptionOrError($description): bool
-    {
-        if ($description == ""){
-            throw new Exception('Invalid Product Description');
-        }
-        return true;
-    }
 
     // TODO reuse this behaviour  (\s* ) move to general Validator
     private function cleanName($name): string

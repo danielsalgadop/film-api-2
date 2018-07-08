@@ -6,7 +6,7 @@ parameters:
 services:
     film.repository.actor:
         class: FilmBundle\Repository\MySQLActorRepository
-        public: false
+        public: true
         arguments:
             - "@doctrine.orm.default_entity_manager"
     film.repository.film:
