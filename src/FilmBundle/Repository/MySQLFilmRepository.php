@@ -3,13 +3,13 @@
 namespace FilmBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use FilmApp\Domain\Actor;
-use FilmApp\Domain\Repository\ActorRepository;
+use FilmApp\Domain\Film;
+use FilmApp\Domain\Repository\FilmRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 use \Exception;
 
-class MySQLActorRepository implements ActorRepository
+class MySQLFilmRepository implements FilmRepository
 {
     private $em;
 
@@ -18,32 +18,32 @@ class MySQLActorRepository implements ActorRepository
         $this->em = $entityManager;
     }
 
-    public function save(Actor $actor)
+    public function persist(Film $actor)
     {
         $this->em->persist($actor);
     }
 
     public function delete(int $actor_id): void
     {
-        $actor = $this->em->getReference('\FilmApp\Domain\Actor', $actor_id);
+        $actor = $this->em->getReference('\FilmApp\Domain\Film', $actor_id);
         $this->em->remove($actor);
     }
 
-    public function findAllActors(): array
+    public function findAllFilms(): array
     {
         return $this->em
-            ->getRepository('FilmBundle:Actor')
+            ->getRepository('FilmBundle:Film')
             ->findAll();
     }
 
-    public function findActorByIdOrError(int $actor_id): Actor
+    public function findFilmByIdOrError(int $actor_id): Film
     {
         $actor = $this->em
-            ->getRepository(Actor::class)
+            ->getRepository(Film::class)
             ->findOneBy(['id' => $actor_id]);
 
         if ($actor  === null) {
-            throw new Exception('Actor does not Existst');
+            throw new Exception('Film does not Existst');
         }
 
         return $actor;

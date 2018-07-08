@@ -9,9 +9,23 @@ services:
         public: false
         arguments:
             - "@doctrine.orm.default_entity_manager"
+    film.repository.film:
+        class: FilmBundle\Repository\MySQLFilmRepository
+        public: false
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+
+
 
     film.command.handler.create.owner:
         class: FilmApp\Application\CommandHandler\Actor\CreateActorCommandHandler
         public: true
         arguments:
+            - "@film.repository.actor"
+
+    film.command.handler.create.film:
+        class: FilmApp\Application\CommandHandler\Film\CreateFilmCommandHandler
+        public: true
+        arguments:
+            - "@film.repository.film"
             - "@film.repository.actor"

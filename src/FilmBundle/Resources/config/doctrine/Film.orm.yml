@@ -11,7 +11,7 @@ FilmApp\Domain\Film:
         name:
             type: string
             length: '100'
-            unique: true
+            unique: false
         description:
             type: text
             nullable: true

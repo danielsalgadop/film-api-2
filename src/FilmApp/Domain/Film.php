@@ -2,84 +2,104 @@
 
 namespace FilmApp\Domain;
 
-/**
- * Film
- */
+use FilmApp\Domain\Actor;
+// use Doctrine\ORM\Mapping as ORM;
+use \Exception;
+
 class Film
 {
-    /**
-     * @var int
-     */
     private $id;
 
-    /**
-     * @var string
-     */
     private $name;
 
-    /**
-     * @var string
-     */
+
     private $description;
 
     private $actor;
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
+    public function __construct(string $name, string $description, Actor $actor)
+    {
+        // Sanitize
+
+        $name = $this->cleanName($name);
+        $description = $this->cleanDescription($description);
+
+        // Validate
+        $this->isValidNameOrError($name);
+        $this->isValidDescriptionOrError($description);
+
+        $this->name = $name;
+        $this->description = $description;
+        $this->actor = $actor;
+    }
+
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Film
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Film
-     */
-    public function setDescription($description)
+    public function setName($name)
     {
-        $this->description = $description;
+        $this->name = $name;
 
-        return $this;
     }
 
-    /**
-     * Get description
-     *
-     * @return string
-     */
     public function getDescription()
     {
         return $this->description;
     }
-}
 
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    public function getActor()
+    {
+        return $this->actor;
+    }
+
+    public function setActor($actor)
+    {
+        $this->actor = $actor;
+    }
+
+    // TODO reuse this behaviour move to general Validator
+    public function isValidNameOrError($name): bool
+    {
+
+        if ($name == ""){
+            throw new Exception('Invalid Product Name');
+        }
+        return true;
+    }
+
+    // TODO reuse this behaviour move to general Validator
+    public function isValidDescriptionOrError($description): bool
+    {
+        if ($description == ""){
+            throw new Exception('Invalid Product Description');
+        }
+        return true;
+    }
+
+    // TODO reuse this behaviour  (\s* ) move to general Validator
+    private function cleanName($name): string
+    {
+        $name = filter_var(trim($name), FILTER_SANITIZE_STRING);
+        return preg_replace("/\s+/", ' ', $name);
+    }
+
+    // TODO reuse this behaviour  (\s* ) move to general Validator
+    private function cleanDescription($description): string
+    {
+        $description = filter_var(trim($description), FILTER_SANITIZE_STRING);
+        return preg_replace("/\s+/", ' ', $description);
+    }
+
+}

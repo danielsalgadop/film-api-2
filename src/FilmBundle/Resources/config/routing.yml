@@ -20,3 +20,8 @@ actor_create:
     path: /api/actor/create/
     defaults: { _controller: FilmBundle:ApiActor:create }
     methods: [POST]
+
+film_create:
+    path: /api/film/create/
+    defaults: { _controller: FilmBundle:ApiFilm:create }
+    methods: [POST]
