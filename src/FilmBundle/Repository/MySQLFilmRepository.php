@@ -18,15 +18,15 @@ class MySQLFilmRepository implements FilmRepository
         $this->em = $entityManager;
     }
 
-    public function persist(Film $actor)
+    public function persist(Film $film)
     {
-        $this->em->persist($actor);
+        $this->em->persist($film);
     }
 
-    public function delete(int $actor_id): void
+    public function delete(int $film_id): void
     {
-        $actor = $this->em->getReference('\FilmApp\Domain\Film', $actor_id);
-        $this->em->remove($actor);
+        $film = $this->em->getReference('\FilmApp\Domain\Film', $film_id);
+        $this->em->remove($film);
     }
 
     public function findAllFilms(): array
@@ -36,17 +36,17 @@ class MySQLFilmRepository implements FilmRepository
             ->findAll();
     }
 
-    public function findFilmByIdOrError(int $actor_id): Film
+    public function findFilmByIdOrError(int $film_id): Film
     {
-        $actor = $this->em
+        $film = $this->em
             ->getRepository(Film::class)
-            ->findOneBy(['id' => $actor_id]);
+            ->findOneBy(['id' => $film_id]);
 
-        if ($actor  === null) {
-            throw new Exception('Film does not Existst');
+        if ($film  === null) {
+            throw new Exception('Film does not Exist');
         }
 
-        return $actor;
+        return $film;
     }
 }
 

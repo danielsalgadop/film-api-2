@@ -43,7 +43,7 @@ class MySQLActorRepository implements ActorRepository
             ->findOneBy(['id' => $actor_id]);
 
         if ($actor  === null) {
-            throw new Exception('Actor does not Existst');
+            throw new Exception('Actor does not Exist');
         }
 
         return $actor;

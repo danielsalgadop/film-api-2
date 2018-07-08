@@ -9,19 +9,26 @@ film_show:
     requirements:
         param1: 'd+'
 
-actor_show:
+api_actor_show:
     path: /actor/{id}/
     defaults: { _controller: FilmBundle:Actor:show }
     methods: [GET]
     requirements:
         param1: 'd+'
 
-actor_create:
+api_actor_create:
     path: /api/actor/create/
     defaults: { _controller: FilmBundle:ApiActor:create }
     methods: [POST]
 
-film_create:
+api_film_create:
     path: /api/film/create/
     defaults: { _controller: FilmBundle:ApiFilm:create }
     methods: [POST]
+
+api_film_read:
+    path: /api/film/{id}/
+    defaults: { _controller: FilmBundle:ApiFilm:read }
+    methods: [GET]
+    requirements:
+        param1: 'd+'

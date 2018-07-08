@@ -9,18 +9,13 @@ use \Exception;
 class Film
 {
     private $id;
-
     private $name;
-
-
     private $description;
-
     private $actor;
 
     public function __construct(string $name, string $description, Actor $actor)
     {
         // Sanitize
-
         $name = $this->cleanName($name);
         $description = $this->cleanDescription($description);
 
@@ -78,6 +73,14 @@ class Film
         }
         return true;
     }
+    public function toArray(): array {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'actor_id' => $this->actor->getId(),
+        ];
+    }
 
 
     // TODO reuse this behaviour  (\s* ) move to general Validator
@@ -93,5 +96,6 @@ class Film
         $description = filter_var(trim($description), FILTER_SANITIZE_STRING);
         return preg_replace("/\s+/", ' ', $description);
     }
+
 
 }

@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FilmApp\Application\Command\Film\CreateFilmCommand;
 use FilmApp\Application\CommandHandler\Film\CreateFilmCommandHandler;
+use FilmApp\Application\CommandHandler\Film\ReadFilmCommandHandler;
 use FilmBundle\Repository\MySQLFilmRepository;
 
 use \Exception;
@@ -30,5 +31,17 @@ class ApiFilmController  extends Controller
             return new JsonResponse(['error' => $e->getMessage()], 400);
         }
         return new JsonResponse( ['success' => "Film Created Correctly"], 200);
+    }
+
+    public function readAction(int $id)
+    {
+        $handler = $this->get('film.command.handler.read.film');
+        try {
+            $film = $handler->handle($id);
+        } catch(Exception $e)
+        {
+            return new JsonResponse(['error' => $e->getMessage()], 400);
+        }
+        return new JsonResponse($film->toArray());
     }
 }
