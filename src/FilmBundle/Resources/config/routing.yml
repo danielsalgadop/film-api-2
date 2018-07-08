@@ -1,3 +1,17 @@
 film_homepage:
     path:     /
     defaults: { _controller: FilmBundle:Default:index }
+
+film_show:
+    path: /film/{id}/
+    defaults: { _controller: FilmBundle:Film:show }
+    methods: [GET]
+    requirements:
+        param1: 'd+'
+
+actor_show:
+    path: /actor/{id}/
+    defaults: { _controller: FilmBundle:Actor:show }
+    methods: [GET]
+    requirements:
+        param1: 'd+'
