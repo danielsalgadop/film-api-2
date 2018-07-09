@@ -30,23 +30,22 @@ class FilmCreateFilmCommand extends ContainerAwareCommand
         $name = $input->getArgument('name');
         $actor_id = $input->getArgument('actor_id');
         $description = $this->cleanDescription($input->getArgument('actor_id'));
-        try{
+        try {
             $this->isValidActorIdOrError($actor_id);
             $this->isValidNameOrError($actor_id);
-        }catch(Exception $e) {
+        } catch (Exception $e) {
             $output->writeln('ERROR: '.$e->getMessage());
             exit;
         }
 
 
-        $command = new CreateFilmCommand((string)$name,(string)$description,(int)$actor_id);
+        $command = new CreateFilmCommand((string)$name, (string)$description, (int)$actor_id);
         $handler = $this->getContainer()->get('film.command.handler.create.film');
 
         try {
             $handler->handle($command);
             $this->getContainer()->get('doctrine.orm.default_entity_manager')->flush();
-        } catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $output->writeln('ERROR: '.$e->getMessage());
             exit;
         }
@@ -58,7 +57,7 @@ class FilmCreateFilmCommand extends ContainerAwareCommand
     // TODO reuse this behaviour move to general Validator
     public function isValidNameOrError($name): bool
     {
-        if ($name == ""){
+        if ($name == "") {
             throw new Exception('Invalid Product Name');
         }
         return true;
@@ -68,7 +67,7 @@ class FilmCreateFilmCommand extends ContainerAwareCommand
     public function isValidActorIdOrError($actor_id): bool
     {
         $actorsEm = $this->getContainer()->get('film.repository.actor');
-        if (!$actorsEm->findActorByIdOrError($actor_id)){
+        if (!$actorsEm->findActorByIdOrError($actor_id)) {
             throw new Exception('Invalid Actor');
         }
         return true;

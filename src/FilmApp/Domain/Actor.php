@@ -1,13 +1,14 @@
 <?php
 
 namespace FilmApp\Domain;
+
 use \Exception;
+
 /**
  * Actor
  */
 class Actor
 {
-
     private $id;
     private $name;
 
@@ -21,7 +22,7 @@ class Actor
     // TODO reuse this behaviour  move to general Validator
     private function isValidNameOrError($name): bool
     {
-        if ($name == ""){
+        if ($name == "") {
             throw new Exception('empty Actor Name');
         }
         return true;
@@ -51,6 +52,4 @@ class Actor
             'name' => $this->getName()
         ];
     }
-
 }
-

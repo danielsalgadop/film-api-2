@@ -19,7 +19,6 @@ class MySQLFilmRepository implements FilmRepository
     {
         $this->em = $entityManager;
         $this->cache = $cache;
-
     }
 
     public function persist(Film $film)
@@ -42,16 +41,14 @@ class MySQLFilmRepository implements FilmRepository
 
     public function findFilmByIdOrError(int $film_id): Film
     {
-
-        if($this->cache->get($film_id) == null){
+        if ($this->cache->get($film_id) == null) {
             $film = $this->em
                 ->getRepository(Film::class)
                 ->findOneBy(['id' => $film_id]);
             if ($film  === null) {
                 throw new Exception('Film does not Exist');
             }
-        }
-        else{
+        } else {
             return $this->cache->get($film_id);
         }
 
@@ -59,4 +56,3 @@ class MySQLFilmRepository implements FilmRepository
         return $film;
     }
 }
-

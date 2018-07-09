@@ -49,4 +49,3 @@ class MySQLActorRepository implements ActorRepository
         return $actor;
     }
 }
-

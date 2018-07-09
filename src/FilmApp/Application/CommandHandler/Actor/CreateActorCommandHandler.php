@@ -6,7 +6,6 @@ namespace FilmApp\Application\CommandHandler\Actor;
 use FilmApp\Domain\Actor;
 use FilmApp\Domain\Repository\ActorRepository;
 
-
 class CreateActorCommandHandler
 {
     private $actorRepository;
@@ -22,5 +21,4 @@ class CreateActorCommandHandler
         $this->actorRepository->save($actor);
         return $actor;
     }
-
 }

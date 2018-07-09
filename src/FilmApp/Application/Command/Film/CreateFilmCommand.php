@@ -8,7 +8,8 @@ class CreateFilmCommand
     private $description;
     private $actor_id;
 
-    public function __construct(string $name, string $description, int $actor_id) {
+    public function __construct(string $name, string $description, int $actor_id)
+    {
         $this->name = $name;
         $this->description = $description;
         $this->actor_id = $actor_id;

@@ -41,7 +41,6 @@ class Film
     public function setName($name)
     {
         $this->name = $name;
-
     }
 
     public function getDescription()
@@ -67,13 +66,13 @@ class Film
     // TODO reuse this behaviour move to general Validator
     public function isValidNameOrError($name): bool
     {
-
-        if ($name == ""){
+        if ($name == "") {
             throw new Exception('Invalid Product Name');
         }
         return true;
     }
-    public function toArray(): array {
+    public function toArray(): array
+    {
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
@@ -96,6 +95,4 @@ class Film
         $description = filter_var(trim($description), FILTER_SANITIZE_STRING);
         return preg_replace("/\s+/", ' ', $description);
     }
-
-
 }
