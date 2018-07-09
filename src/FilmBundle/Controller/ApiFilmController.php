@@ -30,7 +30,7 @@ class ApiFilmController extends Controller
         return new JsonResponse(['success' => "Film Created Correctly"], 200);
     }
 
-    public function readAction(int $id)
+    public function readAction($id)
     {
         $handler = $this->get('film.command.handler.read.film');
         try {

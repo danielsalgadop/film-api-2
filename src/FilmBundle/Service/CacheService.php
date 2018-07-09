@@ -3,6 +3,7 @@
 namespace  FilmBundle\Service;
 
 use Symfony\Component\Filesystem\Filesystem;
+use FilmApp\Domain\Film;
 
 class CacheService
 {
