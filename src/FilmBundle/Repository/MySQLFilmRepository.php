@@ -6,16 +6,20 @@ use Doctrine\ORM\EntityRepository;
 use FilmApp\Domain\Film;
 use FilmApp\Domain\Repository\FilmRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use FilmBundle\Service\CacheService;
 
 use \Exception;
 
 class MySQLFilmRepository implements FilmRepository
 {
     private $em;
+    private $cache;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, CacheService $cache)
     {
         $this->em = $entityManager;
+        $this->cache = $cache;
+
     }
 
     public function persist(Film $film)
@@ -38,14 +42,20 @@ class MySQLFilmRepository implements FilmRepository
 
     public function findFilmByIdOrError(int $film_id): Film
     {
-        $film = $this->em
-            ->getRepository(Film::class)
-            ->findOneBy(['id' => $film_id]);
 
-        if ($film  === null) {
-            throw new Exception('Film does not Exist');
+        if($this->cache->get($film_id) == null){
+            $film = $this->em
+                ->getRepository(Film::class)
+                ->findOneBy(['id' => $film_id]);
+            if ($film  === null) {
+                throw new Exception('Film does not Exist');
+            }
+        }
+        else{
+            return $this->cache->get($film_id);
         }
 
+        $this->cache->set($film);
         return $film;
     }
 }

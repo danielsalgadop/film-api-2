@@ -16,6 +16,7 @@ services:
         public: true
         arguments:
             - "@doctrine.orm.default_entity_manager"
+            - "@film.service.cache"
 
     film.command.handler.create.owner:
         class: FilmApp\Application\CommandHandler\Actor\CreateActorCommandHandler
@@ -35,7 +36,6 @@ services:
         public: true
         arguments:
             - "@film.repository.film"
-            - "@film.service.cache"
 
     film.service.cache:
         class: FilmBundle\Service\CacheService
