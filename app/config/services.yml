@@ -30,6 +30,7 @@ services:
         arguments:
             - "@film.repository.film"
             - "@film.repository.actor"
+            - "@film.service.cache"
 
     film.command.handler.read.film:
         class: FilmApp\Application\CommandHandler\Film\ReadFilmCommandHandler
