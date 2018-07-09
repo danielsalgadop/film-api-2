@@ -1,6 +1,7 @@
 # Learn more about services, parameters and containers at
 # https://symfony.com/doc/current/service_container.html
 parameters:
+    film_cache_dir: filmcache
     #parameter_name: value
 
 services:
@@ -34,3 +35,9 @@ services:
         public: true
         arguments:
             - "@film.repository.film"
+            - "@film.service.cache"
+
+    film.service.cache:
+        class: FilmBundle\Service\CacheService
+        arguments:
+            - "%kernel.root_dir%/../var/cache/%film_cache_dir%"
